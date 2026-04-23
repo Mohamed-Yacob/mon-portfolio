@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parcours Académique | Mohamed-Yacob Guermat</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    
+    <style>
+        :root {
+            --primary-color: #00d2ff;
+            --bg-dark: #0f172a;
+            --bg-card: #1e293b;
+            --text-main: #f8fafc;
+            --text-dim: #94a3b8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding-top: 100px;
+        }
+
+        /* --- NAVIGATION --- */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 8%;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Icône de Diplôme (Adaptée au parcours académique) */
+        .skill-badge-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--primary-color);
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.3s;
+            box-shadow: 0 0 15px rgba(0, 210, 255, 0.5);
+        }
+        .skill-badge-icon i { color: var(--bg-dark); font-size: 1.5rem; }
+
+        .navbar ul { display: flex; list-style: none; }
+        .navbar ul li { margin-left: 2rem; }
+        .navbar ul li a {
+            text-decoration: none;
+            color: var(--text-main);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            transition: 0.3s;
+        }
+        .navbar ul li a:hover, .navbar ul li a.active { color: var(--primary-color); }
+
+        /* --- TIMELINE --- */
+        .container { max-width: 1000px; margin: 0 auto; padding: 2rem; }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 4rem;
+            font-size: 2.5rem;
+            justify-content: center;
+        }
+        .section-title i { color: var(--primary-color); filter: drop-shadow(0 0 8px var(--primary-color)); }
+
+        .timeline { position: relative; padding: 20px 0; }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--primary-color), transparent);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            margin-bottom: 60px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+
+        .timeline-content {
+            width: 45%;
+            background: var(--bg-card);
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .timeline-item:hover .timeline-content {
+            border-color: var(--primary-color);
+            transform: scale(1.02);
+            box-shadow: 0 10px 30px rgba(0, 210, 255, 0.15);
+        }
+
+        .timeline-year {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary-color);
+            color: var(--bg-dark);
+            font-weight: 800;
+            padding: 8px 20px;
+            border-radius: 20px;
+            z-index: 10;
+            box-shadow: 0 0 15px var(--primary-color);
+            letter-spacing: 1px;
+        }
+
+        .timeline-item:nth-child(even) { flex-direction: row-reverse; }
+
+        .timeline-content h3 {
+            color: var(--primary-color);
+            margin-bottom: 8px;
+            font-size: 1.3rem;
+            text-transform: uppercase;
+        }
+
+        .main-info {
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .detail-box {
+            margin-top: 15px;
+            border-top: 1px solid rgba(0, 210, 255, 0.2);
+            padding-top: 12px;
+        }
+
+        .detail-trigger {
+            font-size: 0.8rem;
+            color: var(--primary-color);
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+
+        .detail-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out, opacity 0.4s;
+            opacity: 0;
+            font-size: 0.9rem;
+            color: var(--text-dim);
+            line-height: 1.5;
+        }
+
+        .timeline-content:hover .detail-content {
+            max-height: 250px;
+            opacity: 1;
+            margin-top: 10px;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            width: 14px;
+            height: 14px;
+            background: var(--bg-dark);
+            border: 3px solid var(--primary-color);
+            border-radius: 50%;
+            transform: translateX(-50%);
+            z-index: 5;
+        }
+
+        @media (max-width: 768px) {
+            .timeline::before { left: 20px; }
+            .timeline-year { left: 55px; transform: none; top: -35px; }
+            .timeline-dot { left: 20px; }
+            .timeline-content { width: 85%; margin-left: 45px !important; }
+            .timeline-item { flex-direction: row !important; }
+            .navbar ul { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="accueil.html" title="Retour à l'accueil">
+            <div class="skill-badge-icon">
+                <i class='bx bxs-graduation'></i> </div>
+        </a>
+        <ul>
+            <li><a href="accueil.html">Accueil</a></li>
+            <li><a href="competences.html">Compétences</a></li>
+            <li><a href="parcours_academique.html" class="active" style="color: var(--primary-color);">Parcours académique</a></li>
+            <li><a href="parcours_pro.html">Parcours professionnel</a></li>
+            <li><a href="hobbies.html">CENTRES D’INTÉRÊT </a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        
+        <h1 class="section-title">
+            <i class='bx bxs-graduation'></i> Mon Parcours Académique
+        </h1>
+
+        <div class="timeline">
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-year">2025</div>
+                <div class="timeline-content">
+                    <h3>BUT 2 - R&T</h3>
+                    <span class="main-info">Parcours Cybersécurité</span>
+                    <div class="detail-box">
+                        <span class="detail-trigger"><i class='bx bx-scan'></i>DÉTAILLE</span>
+                        <div class="detail-content">
+                            Spécialisation en sécurité offensive et défensive. Étude approfondie des vulnérabilités réseaux, cryptographie et durcissement système (Hardening). Administration avancée de services réseaux sécurisés à l'Université Sorbonne Paris Nord.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-year">2024</div>
+                <div class="timeline-content">
+                    <h3>BUT 1 - R&T</h3>
+                    <span class="main-info">Tronc commun scientifique</span>
+                    <div class="detail-box">
+                        <span class="detail-trigger"><i class='bx bx-scan'></i>DÉTAILLE</span>
+                        <div class="detail-content">
+                            Bases de l'architecture TCP/IP, configuration d'équipements Cisco, initiation à la programmation Python et administration Linux. Formation classée n°1 en France pour cette discipline.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-year">2023</div>
+                <div class="timeline-content">
+                    <h3>Baccalauréat</h3>
+                    <span class="main-info">Terminale Générale</span>
+                    <div class="detail-box">
+                        <span class="detail-trigger"><i class='bx bx-scan'></i>DÉTAILLE</span>
+                        <div class="detail-content">
+                            Obtention du baccalauréat au Lycée Léon Blum. Spécialités Mathématiques et LLCER Anglais Monde Contemporain (AMC).
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-year">2022</div>
+                <div class="timeline-content">
+                    <h3>Première Générale</h3>
+                    <span class="main-info">Spécialités Scientifiques</span>
+                    <div class="detail-box">
+                        <span class="detail-trigger"><i class='bx bx-scan'></i>DÉTAILLE</span>
+                        <div class="detail-content">
+                            Approfondissement des Mathématiques, de la Physique-Chimie et de l'Anglais technique. Développement d'une rigueur d'analyse scientifique.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-year">2021</div>
+                <div class="timeline-content">
+                    <h3>Seconde Générale</h3>
+                    <span class="main-info">Exploration Fondamentale</span>
+                    <div class="detail-box">
+                        <span class="detail-trigger"><i class='bx bx-scan'></i>DÉTAILLE</span>
+                        <div class="detail-content">
+                            Année de transition au Lycée Léon Blum à Créteil. Choix des spécialités orientées vers les sciences et préparation aux enjeux du cycle terminal.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-year">2020</div>
+                <div class="timeline-content">
+                    <h3>Brevet des Collèges</h3>
+                    <span class="main-info">Mention Bien</span>
+                    <div class="detail-box">
+                        <span class="detail-trigger"><i class='bx bx-scan'></i>DÉTAILLE</span>
+                        <div class="detail-content">
+                            Réussite au Collège Louis Issaurat. Stage de découverte dans une entreprise d'EDI (Échange de Données Informatisées), première immersion dans le monde de l'informatique professionnelle.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

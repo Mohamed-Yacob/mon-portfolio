@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CENTRES D’INTÉRÊT  | Mohamed-Yacob Guermat</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        :root {
+            --primary-color: #00d2ff;
+            --bg-dark: #0f172a;
+            --bg-card: #1e293b;
+            --text-main: #f8fafc;
+            --text-dim: #94a3b8;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background-color: var(--bg-dark); color: var(--text-main); line-height: 1.6; padding-top: 100px; overflow-x: hidden; }
+
+        /* --- NAVBAR --- */
+        .navbar {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 1rem 8%; background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px); position: fixed;
+            width: 100%; top: 0; z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .skill-badge-icon {
+            width: 40px; height: 40px; background: var(--primary-color);
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 0 15px rgba(0, 210, 255, 0.5);
+        }
+        .skill-badge-icon i { color: var(--bg-dark); font-size: 1.5rem; }
+        .navbar ul { display: flex; list-style: none; }
+        .navbar ul li { margin-left: 2rem; }
+        .navbar ul li a { text-decoration: none; color: var(--text-main); font-size: 0.85rem; text-transform: uppercase; transition: 0.3s; }
+        .navbar ul li a:hover, .navbar ul li a.active { color: var(--primary-color); }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+        .section-title { display: flex; align-items: center; gap: 15px; margin-bottom: 2rem; font-size: 2.2rem; }
+        .section-title i { color: var(--primary-color); }
+
+        /* --- SPORT SECTION --- */
+        .sport-intro { color: var(--text-dim); margin-bottom: 2.5rem; max-width: 900px; }
+        .sport-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-bottom: 5rem; }
+        .sport-card { 
+            background: var(--bg-card); border-radius: 15px; padding: 20px; 
+            border-left: 4px solid var(--primary-color); transition: 0.3s;
+        }
+        .sport-card:hover { transform: translateY(-5px); background: #2d3a4f; }
+        .sport-card h3 { color: var(--primary-color); margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
+        .sport-card p { font-size: 0.85rem; color: var(--text-dim); }
+
+        /* --- GAMING SECTION --- */
+        .gaming-flex { display: flex; align-items: center; gap: 4rem; margin-bottom: 6rem; background: rgba(30, 41, 59, 0.4); padding: 40px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.05); }
+        .gaming-images { position: relative; width: 500px; height: 350px; }
+        .gaming-images img { position: absolute; border-radius: 20px; border: 4px solid var(--bg-card); width: 300px; transition: 0.5s; }
+        .img-1 { top: 0; left: 0; z-index: 2; }
+        .img-2 { bottom: 0; right: 0; z-index: 1; }
+        .gaming-images:hover .img-1 { transform: translate(-20px, -20px); }
+        .gaming-images:hover .img-2 { transform: translate(20px, 20px); }
+        .gaming-text h2 { color: var(--primary-color); margin-bottom: 15px; }
+
+        /* --- VOYAGES SECTION --- */
+        .voyage-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
+        .voyage-card { 
+            position: relative; 
+            border-radius: 20px; 
+            overflow: hidden; /* Important pour cacher le texte qui dépasse */
+            height: 300px; 
+            cursor: pointer; 
+        }
+        .voyage-card img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+        
+        .voyage-overlay { 
+            position: absolute; 
+            bottom: 0; 
+            left: 0; 
+            width: 100%; 
+            padding: 20px; 
+            background: linear-gradient(transparent, rgba(15, 23, 42, 0.95)); 
+            /* Correction : on descend le texte à 100% pour qu'il soit invisible au repos */
+            transform: translateY(100%); 
+            transition: transform 0.5s ease;
+        }
+
+        .voyage-card:hover img { transform: scale(1.1); }
+        
+        /* Correction : le texte remonte parfaitement au survol */
+        .voyage-card:hover .voyage-overlay { 
+            transform: translateY(0); 
+        }
+
+        .voyage-overlay h4 { color: var(--primary-color); margin-bottom: 5px; }
+        .voyage-overlay p { font-size: 0.8rem; color: var(--text-main); line-height: 1.3; }
+
+        @media (max-width: 900px) {
+            .gaming-flex { flex-direction: column; text-align: center; }
+            .gaming-images { width: 100%; height: 400px; display: flex; justify-content: center; }
+            .gaming-images img { position: relative; width: 45%; height: auto; margin: 5px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="accueil.html">
+            <div class="skill-badge-icon"><i class='bx bx-heart'></i></div>
+        </a>
+        <ul>
+            <li><a href="accueil.html">Accueil</a></li>
+            <li><a href="competences.html">Compétences</a></li>
+            <li><a href="parcours_academique.html">Parcours académique</a></li>
+            <li><a href="parcours_pro.html">Parcours professionnel</a></li>
+            <li><a href="hobbies.html" class="active" style="color: var(--primary-color);">CENTRES D’INTÉRÊT </a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        
+        <h1 class="section-title"><i class='bx bx-run'></i> Le Sport</h1>
+        <p class="sport-intro">
+            Pratiquant depuis l'âge de 6 ans, j'ai exploré diverses disciplines (Judo, Aïkido, Boxe, Football). Aujourd'hui, je me concentre sur la musculation pour entretenir ma condition physique et ma discipline.
+        </p>
+
+        <div class="sport-grid">
+            <div class="sport-card">
+                <h3><i class='bx bx-dumbbell'></i> Musculation</h3>
+                <p>Pratique régulière depuis plus d’un an, développant force, endurance et persévérance mentale au quotidien.</p>
+            </div>
+            <div class="sport-card">
+                <h3><i class='bx bxs-up-arrow-circle'></i> Boxe</h3>
+                <p>3 ans de pratique intensive m'ayant inculqué la maîtrise de soi, la coordination et la gestion du stress.</p>
+            </div>
+            <div class="sport-card">
+                <h3><i class='bx bx-football'></i> Football</h3>
+                <p>Une passion de longue date partagée entre amis, renforçant l'esprit d'équipe et la réactivité.</p>
+            </div>
+        </div>
+
+        <div class="gaming-flex">
+            <div class="gaming-images">
+                <img src="gaming-setup-with-controller-headphones.jpg" class="img-1" alt="Setup">
+                <img src="gamer-chair-with-multicolored-neon-lights.jpg" class="img-2" alt="Chair">
+            </div>
+            <div class="gaming-text">
+                <h2>Jeux Vidéo 🎮</h2>
+                <p>Passionné depuis l'enfance, de la Nintendo DS aux dernières PlayStation. J'apprécie la stratégie et la compétition sur des titres comme FIFA, Call of Duty et Fortnite.</p>
+            </div>
+        </div>
+
+        <h1 class="section-title"><i class='bx bx-planet'></i> Les Voyages</h1>
+        <p class="sport-intro">Explorer de nouveaux horizons est une source d'inspiration qui enrichit ma compréhension du monde et des cultures.</p>
+        
+        <div class="voyage-grid">
+            <div class="voyage-card">
+                <img src="eiffel-tower-champ-de-mars-paris-france.jpg" alt="France">
+                <div class="voyage-overlay"><h4>France</h4><p>Art de vivre et patrimoine.</p></div>
+            </div>
+            <div class="voyage-card">
+                <img src="algerie-desert.jpg" alt="Algérie">
+                <div class="voyage-overlay"><h4>Algérie</h4><p>Hospitalité chaleureuse et paysages époustouflants.</p></div>
+            </div>
+            <div class="voyage-card">
+                <img src="Londres.jpg" alt="Angleterre">
+                <div class="voyage-overlay"><h4>Angleterre</h4><p>Traditions et dynamisme urbain.</p></div>
+            </div>
+            <div class="voyage-card">
+                <img src="espagne.jpg" alt="Espagne">
+                <div class="voyage-overlay"><h4>Espagne</h4><p>Culture riche et climat agréable.</p></div>
+            </div>
+            <div class="voyage-card">
+                <img src="belgique.jpg" alt="Belgique">
+                <div class="voyage-overlay"><h4>Belgique</h4><p>Villes historiques et convivialité.</p></div>
+            </div>
+            <div class="voyage-card">
+                <img src="maroc.jpg" alt="Maroc">
+                <div class="voyage-overlay"><h4>Maroc</h4><p>Authenticité et gastronomie locale.</p></div>
+            </div>
+            <div class="voyage-card">
+                <img src="berlin.jpg" alt="Allemagne">
+                <div class="voyage-overlay"><h4>Allemagne</h4><p>Patrimoine historique et nature.</p></div>
+            </div>
+            <div class="voyage-card">
+                <img src="turquie.jpg" alt="Turquie">
+                <div class="voyage-overlay"><h4>Turquie</h4><p>Histoire fascinante, cuisine délicieuse et paysages variés.</p></div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

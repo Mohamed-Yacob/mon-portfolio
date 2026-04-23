@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compétences | Mohamed-Yacob Guermat</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    
+    <style>
+        /* --- VARIABLES ET RESET (Idem Accueil) --- */
+        :root {
+            --primary-color: #00d2ff;
+            --bg-dark: #0f172a;
+            --bg-card: #1e293b;
+            --text-main: #f8fafc;
+            --text-dim: #94a3b8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding-top: 100px; /* Espace pour la navbar */
+        }
+
+        /* --- BARRE DE NAVIGATION --- */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 8%;
+            background: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Icône Compétence Hexagonale cliquable */
+        .skill-badge-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--primary-color);
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.3s;
+            box-shadow: 0 0 15px rgba(0, 210, 255, 0.5);
+        }
+        .skill-badge-icon i { color: var(--bg-dark); font-size: 1.5rem; }
+
+        .navbar ul { display: flex; list-style: none; }
+        .navbar ul li { margin-left: 2rem; }
+        .navbar ul li a {
+            text-decoration: none;
+            color: var(--text-main);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            transition: 0.3s;
+        }
+        .navbar ul li a:hover { color: var(--primary-color); }
+
+        /* --- CONTENU --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+        }
+
+        .section-title i {
+            color: var(--primary-color);
+            filter: drop-shadow(0 0 8px var(--primary-color));
+        }
+
+        /* Grille des compétences */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 5rem;
+        }
+
+        .skill-card {
+            background: var(--bg-card);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: 0.3s ease;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-color);
+            box-shadow: 0 10px 30px rgba(0, 210, 255, 0.1);
+        }
+
+        .skill-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.2rem;
+        }
+
+        .skill-card p {
+            font-size: 0.95rem;
+            color: var(--text-dim);
+        }
+
+        .skill-card strong {
+            color: var(--text-main);
+        }
+
+        /* --- NOUVELLE SECTION LANGUES --- */
+        .languages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 5rem;
+        }
+
+        .lang-card {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .lang-card h4 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        .lang-card span {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        /* Projets Universitaires */
+        .projects-section {
+            background: rgba(0, 210, 255, 0.03);
+            padding: 3rem;
+            border-radius: 20px;
+            border: 1px dashed rgba(0, 210, 255, 0.2);
+        }
+
+        .project-item {
+            margin-bottom: 2rem;
+            border-left: 3px solid var(--primary-color);
+            padding-left: 1.5rem;
+        }
+
+        .project-item h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-item p {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+        }
+
+        /* Responsivité */
+        @media (max-width: 768px) {
+            .navbar ul { display: none; }
+            .section-title { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="accueil.html" title="Retour à l'accueil">
+            <div class="skill-badge-icon">
+                <i class='bx bx-check-shield'></i> </div>
+        </a>
+        <ul>
+            <li><a href="accueil.html">Accueil</a></li>
+            <li><a href="competences.html" style="color: var(--primary-color);">Compétences</a></li>
+            <li><a href="parcours_academique.html">Parcours académique</a></li>
+            <li><a href="parcours_pro.html">Parcours professionnel</a></li>
+            <li><a href="hobbies.html">CENTRES D’INTÉRÊT </a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        
+        <h1 class="section-title">
+            <i class='bx bx-code-alt'></i> Mes Compétences
+        </h1>
+
+        <div class="skills-grid">
+            
+            <div class="skill-card">
+                <h3><i class='bx bx-shield-quarter'></i> Cybersécurité</h3>
+                <p><strong>Pentesting</strong>, analyse de trafic (Wireshark). Scans de vulnérabilités (<strong>Nmap, Nessus</strong>). Simulation réseau (GNS3, Marionnet).</p>
+            </div>
+
+            <div class="skill-card">
+                <h3><i class='bx bx-server'></i> Réseaux & Infra</h3>
+                <p>Modèles OSI/TCP-IP, LAN, VLAN, routage. Protocoles réseau et équipement Cisco. Configuration pare-feu (<strong>pfSense</strong>, iptables).</p>
+            </div>
+
+            <div class="skill-card">
+                <h3><i class='bx bx-terminal'></i> Admin & Virtualisation</h3>
+                <p>Systèmes <strong>Linux</strong> (Ubuntu, Debian, <strong>CentOS</strong>). Virtualisation (VMware, VirtualBox).</p>
+            </div>
+
+            <div class="skill-card">
+                <h3><i class='bx bx-code-block'></i> Dév Web & Données</h3>
+                <p>HTML, CSS, PHP, Python (scripts). Bases de données : SQL, PostgreSQL, MariaDB.</p>
+            </div>
+
+            <div class="skill-card">
+                <h3><i class='bx bx-broadcast'></i> Télécommunications</h3>
+                <p>Fibre optique, transmission et propagation. Étude de modulation et signaux.</p>
+            </div>
+
+            <div class="skill-card">
+                <h3><i class='bx bx-transfer-alt'></i> TradeXpress EDI</h3>
+                <p>EDI, RTE et norme EDIFACT.</p>
+            </div>
+
+        </div>
+
+        <h2 class="section-title" style="font-size: 2rem;">
+            <i class='bx bx-world'></i> Langues
+        </h2>
+        <div class="languages-grid">
+            <div class="lang-card">
+                <h4>Français : <span>Natif</span></h4>
+            </div>
+            <div class="lang-card">
+                <h4>Anglais : <span>Niveau B2 (Technique)</span></h4>
+            </div>
+            <div class="lang-card">
+                <h4>Espagnol : <span>Niveau B1</span></h4>
+            </div>
+            <div class="lang-card">
+                <h4>Arabe : <span>Derdja & Littéraire</span></h4>
+            </div>
+        </div>
+
+        <h2 class="section-title" style="font-size: 2rem;">
+            <i class='bx bx-folder-open'></i> Projets Universitaires
+        </h2>
+
+        <div class="projects-section">
+            
+            <div class="project-item">
+                <h4>Cybersécurité et Réseaux</h4>
+                <p>Conception réseau multi-sites sécurisé (DMZ, VLAN, pfSense). Analyse des vulnérabilités et tests d’intrusion.</p>
+            </div>
+
+            <div class="project-item">
+                <h4>Traitement des données & Web</h4>
+                <p>Automatisation de données en Python. Création d’un site web (HTML/CSS, PHP).</p>
+            </div>
+
+            <div class="project-item">
+                <h4>Télécommunications</h4>
+                <p>Conception d’une chaîne de transmission et modulation. Architecture et programmation d’un microprocesseur.</p>
+            </div>
+
+            <div class="project-item">
+                <h4>Sensibilisation à la cybersécurité</h4>
+                <p>Réalisation d'une vidéo pédagogique sur les enjeux de la cybersécurité.</p>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

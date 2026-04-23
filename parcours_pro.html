@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parcours Professionnel | Mohamed-Yacob Guermat</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    
+    <style>
+        :root {
+            --primary-color: #00d2ff;
+            --bg-dark: #0f172a;
+            --bg-card: #1e293b;
+            --text-main: #f8fafc;
+            --text-dim: #94a3b8;
+        }
+
+        * {
+            margin: 0; padding: 0; box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding-top: 100px;
+        }
+
+        /* --- NAVIGATION --- */
+        .navbar {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 1rem 8%; background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px); position: fixed;
+            width: 100%; top: 0; z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .skill-badge-icon {
+            width: 40px; height: 40px; background: var(--primary-color);
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+            display: flex; align-items: center; justify-content: center;
+            transition: 0.3s; box-shadow: 0 0 15px rgba(0, 210, 255, 0.5);
+        }
+        .skill-badge-icon i { color: var(--bg-dark); font-size: 1.5rem; }
+
+        .navbar ul { display: flex; list-style: none; }
+        .navbar ul li { margin-left: 2rem; }
+        .navbar ul li a {
+            text-decoration: none; color: var(--text-main);
+            font-size: 0.85rem; text-transform: uppercase; transition: 0.3s;
+        }
+        .navbar ul li a:hover, .navbar ul li a.active { color: var(--primary-color); }
+
+        /* --- CONTENU --- */
+        .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+
+        .section-title {
+            display: flex; align-items: center; gap: 15px;
+            margin-bottom: 4rem; font-size: 2.5rem;
+        }
+        .section-title i { color: var(--primary-color); filter: drop-shadow(0 0 8px var(--primary-color)); }
+
+        /* Correction pour centrer les éléments du bas */
+        .exp-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center; /* Centre les cartes sur chaque ligne */
+            gap: 2rem;
+            margin-bottom: 5rem;
+        }
+
+        .exp-card {
+            flex: 1 1 320px; /* Base de 320px, peut s'étendre */
+            max-width: 380px; /* Évite que les cartes centrées soient trop larges */
+            background: var(--bg-card); border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 2rem; transition: 0.3s ease;
+            position: relative; overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .exp-card::before {
+            content: ''; position: absolute; top: 0; left: 0;
+            width: 4px; height: 100%; background: var(--primary-color);
+        }
+
+        .exp-card:hover {
+            transform: translateY(-5px); border-color: var(--primary-color);
+            box-shadow: 0 10px 30px rgba(0, 210, 255, 0.1);
+        }
+
+        .card-icon {
+            font-size: 2.5rem; color: var(--primary-color);
+            margin-bottom: 1.5rem; opacity: 0.8;
+        }
+
+        .exp-card h3 { color: var(--primary-color); margin-bottom: 5px; font-size: 1.25rem; }
+        .company { color: var(--text-dim); font-size: 0.85rem; font-weight: 600; display: block; margin-bottom: 1.2rem; }
+        
+        .task-list { list-style: none; color: var(--text-dim); font-size: 0.85rem; }
+        .task-list li { margin-bottom: 8px; display: flex; gap: 10px; }
+        .task-list li i { color: var(--primary-color); margin-top: 4px; font-size: 1rem; }
+
+        .date-label {
+            position: absolute; top: 20px; right: 20px;
+            font-size: 0.75rem; color: var(--primary-color);
+            font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+        }
+
+        @media (max-width: 768px) {
+            .navbar ul { display: none; }
+            .section-title { font-size: 1.8rem; flex-direction: column; text-align: center; }
+            .exp-card { max-width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="accueil.html" title="Retour à l'accueil">
+            <div class="skill-badge-icon">
+                <i class='bx bx-briefcase'></i>
+            </div>
+        </a>
+        <ul>
+            <li><a href="accueil.html">Accueil</a></li>
+            <li><a href="competences.html">Compétences</a></li>
+            <li><a href="parcours_academique.html">Parcours académique</a></li>
+            <li><a href="parcours_pro.html" class="active" style="color: var(--primary-color);">Parcours professionnel</a></li>
+            <li><a href="hobbies.html">CENTRES D’INTÉRÊT </a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        
+        <h1 class="section-title">
+            <i class='bx bx-briefcase-alt-2'></i> Expériences & Missions
+        </h1>
+
+        <div class="exp-grid">
+
+            <div class="exp-card">
+                <span class="date-label">Stage 2026</span>
+                <div class="card-icon"><i class='bx bx-server'></i></div>
+                <h3>Système & Réseau</h3>
+                <span class="company">Exacompta</span>
+                <ul class="task-list">
+                    <li><i class='bx bx-chevron-right'></i> Audit de sécurité TREND et refonte Syslog.</li>
+                    <li><i class='bx bx-chevron-right'></i> Migration PRTG et mise à jour KACE (v15).</li>
+                    <li><i class='bx bx-chevron-right'></i> Consolidation règles FMC et gestion objets AD.</li>
+                    <li><i class='bx bx-chevron-right'></i> Segmentation réseau : Proposition "No VLAN1".</li>
+                </ul>
+            </div>
+
+            <div class="exp-card">
+                <span class="date-label">Stage 2021 - Formation 2026</span>
+                <div class="card-icon"><i class='bx bx-transfer-alt'></i></div>
+                <h3>EDI / TradeXpress</h3>
+                <span class="company">Société Esalink</span>
+                <ul class="task-list">
+                    <li><i class='bx bx-chevron-right'></i> Gestion des flux clients via TradeXpress.</li>
+                    <li><i class='bx bx-chevron-right'></i> Utilisation de la norme EDIFACT (B2B).</li>
+                    <li><i class='bx bx-chevron-right'></i> Initiation au langage de traduction RTE.</li>
+                </ul>
+            </div>
+
+            <div class="exp-card">
+                <span class="date-label">CDD</span>
+                <div class="card-icon"><i class='bx bx-train'></i></div>
+                <h3>Agent de Vente</h3>
+                <span class="company">SNCF - Parc des Expositions</span>
+                <ul class="task-list">
+                    <li><i class='bx bx-chevron-right'></i> Accueil et service client en environnement flux tendu.</li>
+                    <li><i class='bx bx-chevron-right'></i> Gestion de caisse et vente de titres de transport.</li>
+                    <li><i class='bx bx-chevron-right'></i> Orientation et gestion des flux voyageurs.</li>
+                </ul>
+            </div>
+
+            <div class="exp-card">
+                <span class="date-label">Certification</span>
+                <div class="card-icon"><i class='bx bx-certification'></i></div>
+                <h3>Cambridge English</h3>
+                <span class="company">Certification Internationale</span>
+                <ul class="task-list">
+                    <li><i class='bx bx-chevron-right'></i> Maîtrise de l'anglais technique et professionnel.</li>
+                    <li><i class='bx bx-chevron-right'></i> Développement de la fluidité orale et rédactionnelle.</li>
+                </ul>
+            </div>
+
+            <div class="exp-card">
+                <span class="date-label">Formation</span>
+                <div class="card-icon"><i class='bx bx-plus-medical'></i></div>
+                <h3>Gestes de Secours</h3>
+                <span class="company">PSC1</span>
+                <ul class="task-list">
+                    <li><i class='bx bx-chevron-right'></i> Maîtrise des gestes de premiers secours d'urgence.</li>
+                    <li><i class='bx bx-chevron-right'></i> Utilisation de défibrillateur et réanimation (RCP).</li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>
